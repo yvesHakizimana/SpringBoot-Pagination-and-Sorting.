@@ -18,8 +18,9 @@ public class EmployeeController {
     public String getEmployees(
             Model model,
             @RequestParam(name = "page", defaultValue = "0", required = false) int pageNumber,
-            @RequestParam(name = "size", defaultValue = "10", required = false) int pageSize){
-        model.addAttribute("employees",  employeeService.getAllEmployees(pageNumber, pageSize));
+            @RequestParam(name = "size", defaultValue = "10", required = false) int pageSize,
+            @RequestParam(name = "sortBy", defaultValue = "id", required = false) String sortParam){
+        model.addAttribute("employees",  employeeService.getAllEmployees(pageNumber, pageSize, sortParam));
         return "index";
     }
 

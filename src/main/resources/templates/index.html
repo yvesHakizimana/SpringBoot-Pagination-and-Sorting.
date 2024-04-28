@@ -12,6 +12,16 @@
 <body>
 <h1>List Of Employees.</h1>
 <a th:href="@{/addnew}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
+<div class="mb-3">
+    <label for="sortSelect" class="mr-2">Sort by:</label>
+    <select id="sortSelect" class="form-control" onchange="location = this.value;">
+        <option value="?sortBy=id">ID</option>
+        <option value="?sortBy=firstName">First Name</option>
+        <option value="?sortBy=lastName">Last Name</option>
+        <option value="?sortBy=email">Email</option>
+        <option value="?sortBy=gender">Gender</option>
+    </select>
+</div>
 <div class="container">
     <table class="table">
         <thead>

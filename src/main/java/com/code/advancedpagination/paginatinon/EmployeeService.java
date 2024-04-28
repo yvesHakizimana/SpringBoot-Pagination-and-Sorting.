@@ -17,21 +17,21 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
 
-    public PageResponse<Employee> getAllEmployees(int pageNumber, int pageSize) {
-        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("id").ascending()  );
-        Page<Employee> employeePage = employeeRepository.findAll(pageable);
-        List<Employee> employeeList = employeePage.stream()
-                .map(employeeMapper::toEmployee)
-                .toList();
-        return new PageResponse<>(
-                employeeList,
-                employeePage.getNumber(),
-                employeePage.getSize(),
-                employeePage.getTotalElements(),
-                employeePage.getTotalPages(),
-                employeePage.isFirst(),
-                employeePage.isLast());
-    }
+    public PageResponse<Employee> getAllEmployees(int pageNumber, int pageSize, String sortField) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by(sortField).ascending()  );
+            Page<Employee> employeePage = employeeRepository.findAll(pageable);
+            List<Employee> employeeList = employeePage.stream()
+                    .map(employeeMapper::toEmployee)
+                    .toList();
+            return new PageResponse<>(
+                    employeeList,
+                    employeePage.getNumber(),
+                    employeePage.getSize(),
+                    employeePage.getTotalElements(),
+                    employeePage.getTotalPages(),
+                    employeePage.isFirst(),
+                    employeePage.isLast());
+        }
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
